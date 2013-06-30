@@ -1,11 +1,3 @@
-Nikhil Verma
-============
-
-+447596429420 [nikhilgotmail@gmail.com](mailto:nikhilgotmail@gmail.com)
-
-### A web developer with over seven years of experience and has worked in five different countries. I am a developer and a designer who is passionate about the latest technologies and good user experiences.
-
-
 
 #### Technical Experience
 
