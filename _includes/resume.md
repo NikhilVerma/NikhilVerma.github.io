@@ -7,7 +7,7 @@
 * Adobe Photoshop
 * Git, SVN
 * Markdown, Dust
-* *nix systems, Shell Scripting, Maven
+* \*nix systems, Shell Scripting, Maven
 * Responsive layout with special emphasis on mobile first designs
 * Cross browser compatibilities
 * Performance optimizations for Desktop and Mobile using both CSS and Javascript
