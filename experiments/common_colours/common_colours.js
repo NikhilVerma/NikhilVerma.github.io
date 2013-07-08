@@ -11,7 +11,7 @@ var Utils = {
     }),
 
     euclidianDistance: function(a, b) {
-        return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2));
+        return Math.sqrt(Math.pow(a[0] - b[0], 2) * 0.3 + Math.pow(a[1] - b[1], 2) * 0.35 + Math.pow(a[2] - b[2], 2) * 0.35);
     },
 
     getProminentColors: function(array) {
@@ -110,7 +110,7 @@ var handleFileSelect = function(e) {
 
             var str = '';
             for (i = 0, len = colors.colors.length; i < len; i++) {
-                str += '<span style="background-color:rgb(' + colors.colors[i][0] + '); width:' + (colors.colors[i][1] / colors.sum * 100) + '%">' + colors.colors[i][1] + '</span>';
+                str += '<span style="background-color:rgb(' + colors.colors[i][0] + '); width:' + (colors.colors[i][1] / colors.sum * 100) + '%">' + Math.round(colors.colors[i][1] / colors.sum * 100) + '%</span>';
             }
 
             output.innerHTML = str;

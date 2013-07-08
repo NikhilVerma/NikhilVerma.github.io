@@ -14,7 +14,6 @@
 * Agile/Scrum
 
 
-
 ## Career
 
 **Mobile Web Developer at Badoo, London, UK** _Jan 2013 - Present_
@@ -74,7 +73,6 @@
 - Designed UI’s for various websites and then converted them to HTML/CSS.
 
 
-
 ## Key Strengths
 
 - Ability to learn new technologies and frameworks quickly and adapting to coding standards/methods by analyzing existing code.
@@ -82,13 +80,11 @@
 - Finding simple and effective solutions to problems
 
 
-
 ## Education
 
 - **B.Tech in Computer Science** from _Dr. M.C. Saxena College of Engineering and Technology, Lucknow_, Lucknow (2004 - 2008)
 - **ISC** from _Lucknow Public College, Lucknow_ (2003 - 2004)
 - **ICSE** from _Lucknow Public College, Lucknow_ (2001 - 2002)
-
 
 
 ## Other Interests
