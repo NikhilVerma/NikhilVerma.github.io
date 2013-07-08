@@ -1,23 +1,24 @@
 // Please don't judge my code quality. I hacked this together while experimenting.
 
 var Utils = {
-    toYUV: _.memoize(function(r, g, b) {
+    toYUV: _.memoize(function (r, g, b) {
         var y = r * 0.299000 + g * 0.587000 + b * 0.114000;
         var u = 0.713 * (r - y);
         var v = 0.564 * (b - u);
         return [y, u, v];
-    }, function(r, g, b) {
+    }, function (r, g, b) {
         return '' + r + g + b;
     }),
 
-    euclidianDistance: function(a, b) {
-        return Math.sqrt(Math.pow(a[0] - b[0], 2) * 0.3 + Math.pow(a[1] - b[1], 2) * 0.35 + Math.pow(a[2] - b[2], 2) * 0.35);
+    euclidianDistance: function (a, b) {
+        return Math.sqrt(Math.pow(a[0] - b[0], 2) * 0.1 + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2));
     },
 
-    getProminentColors: function(array) {
+    getProminentColors: function (array) {
         var samples = [];
         var len = array.length;
         var i, j, dist;
+        var avgDist = 0;
 
         // Populate the colors array
         for (i = 0, len = array.length; i < len; i++) {
@@ -30,19 +31,22 @@ var Utils = {
             for (j = len; j > i; j--) {
                 if (samples[i] && samples[j]) {
                     dist = this.euclidianDistance(this.toYUV.apply(this, samples[i][0]), this.toYUV.apply(this, samples[j][0]));
+                    avgDist = (dist + avgDist) / 2;
 
                     // Colors are similar
-                    if (dist < 30) {
+                    if (dist < 20) {
                         samples[i][1]++;
                         // Empty the other element as it's too similar
                         samples[j] = null;
-                    } else if (dist > 150) {
+                    } else if (dist > 100) {
                         // colors are too different, we need to give those priority as well
-                        samples[j][1]++;
+                        samples[j][1] += 2;
                     }
                 }
             }
         }
+
+        console.log(avgDist);
 
         var output = [];
         var sum = 0;
@@ -54,7 +58,7 @@ var Utils = {
             }
         }
 
-        output = output.sort(function(a, b) {
+        output = output.sort(function (a, b) {
             return b[1] - a[1];
         });
 
@@ -65,7 +69,7 @@ var Utils = {
     }
 };
 
-var CanvasView = (function() {
+var CanvasView = (function () {
 
     var canvas = document.createElement('canvas');
 
@@ -77,10 +81,10 @@ var CanvasView = (function() {
 
         context: canvas.getContext('2d'),
 
-        getImagePixelsFromSrc: function(src, callback) {
+        getImagePixelsFromSrc: function (src, callback) {
             var img = new Image();
 
-            img.onload = _.bind(function() {
+            img.onload = _.bind(function () {
                 var width = canvas.width = this.width;
                 var height = canvas.height = this.width * img.height / img.width | 0;
                 this.context.drawImage(img, 0, 0, width, height);
@@ -100,12 +104,12 @@ var CanvasView = (function() {
     };
 })();
 
-var handleFileSelect = function(e) {
+var handleFileSelect = function (e) {
     var reader = new FileReader();
     var output = document.getElementById('output');
 
-    reader.onload = function(e) {
-        CanvasView.getImagePixelsFromSrc(e.target.result, function(pixels) {
+    reader.onload = function (e) {
+        CanvasView.getImagePixelsFromSrc(e.target.result, function (pixels) {
             var colors = Utils.getProminentColors(pixels);
 
             var str = '';
