@@ -12,6 +12,7 @@
 * Cross browser compatibilities
 * Performance optimizations for Desktop and Mobile using both CSS and Javascript
 * Agile/Scrum
+* Buster.js, js-test-driver
 
 
 ## Career
