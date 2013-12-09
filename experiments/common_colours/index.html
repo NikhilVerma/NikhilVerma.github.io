@@ -5,19 +5,18 @@ title: Common colours of an image
 {% include header.html %}
 
 <style>
-    * {
-        margin: 0;
+    body {
         padding: 0;
-        font-family: Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
     }
 
     .content {
-        background: #fefefe;
+        background: rgba(250,250,250,0.9);
         border-radius: 5px;
         width: 70%;
         margin: 10px auto;
         padding: 10px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        text-align: center;
     }
 
     h1 {
@@ -73,10 +72,10 @@ title: Common colours of an image
 
 <div class="content">
     <h1>Common Colors</h1>
+    <span class="note">Upload an image or drag an image file on this box</span>
     <input type="file" id="files" name="files[]" multiple />
 </div>
 
-<script src="underscore.js"></script>
 <script src="common_colours.js"></script>
 
 {% include footer.html %}

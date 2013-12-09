@@ -4,6 +4,19 @@
  */
 var Utils = {
 
+    readFile: function (file) {
+
+        if (/image/.test(file.type) === true) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                Utils.getPixelsFromSrc(e.target.result, Utils.renderData);
+            };
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(file);
+        }
+
+    },
+
     /**
      * Converts RGB to YUV color.
      * @param  {Number} r
@@ -103,16 +116,10 @@ var Utils = {
         };
     },
 
-    /**
-     * Returns pixels from a source image using canvas. The input image is scaled
-     * down to prevent huge processing times
-     * @return {Array} array of YUV colors
-     */
-    getPixelsFromSrc: (function () {
+    getPixelsFromImg: (function () {
 
         var canvas = document.createElement('canvas');
         var ctx = canvas.getContext('2d');
-        var cb = _.indentity;
 
         /**
          * We scale the image down to 20x width
@@ -126,8 +133,7 @@ var Utils = {
          */
         var SCALE_STEPS = 10;
 
-        var img = new Image();
-        img.onload = function () {
+        return function (img, callback) {
             var width = canvas.width = img.width;
             var height = canvas.height = img.height;
             var i, len;
@@ -154,38 +160,63 @@ var Utils = {
                 arr.push(Utils.toYUV(data[i], data[i + 1], data[i + 2]));
             }
 
-            cb(arr);
+            callback(arr);
         };
+    })(),
 
-        return function (src, callback) {
-            cb = callback;
-            img.src = src;
+    /**
+     * Returns pixels from a source image using canvas. The input image is scaled
+     * down to prevent huge processing times
+     * @return {Array} array of YUV colors
+     */
+    getPixelsFromSrc: function (src, callback) {
+
+        var img = new Image();
+        img.onload = function () {
+            Utils.getPixelsFromImg(this, callback);
         };
-    })()
+        img.src = src;
+    },
+
+    renderData: function (pixels) {
+        var output = $('#output');
+
+        var colors = Utils.getProminentColors(pixels);
+        var i, len, width;
+        var str = '';
+
+        for (i = 0, len = colors.colors.length; i < len; i++) {
+            width = colors.colors[i][1] / colors.sum * 100;
+            str += '<span style="background-color:rgb(' + Utils.toRGB.apply(this, colors.colors[i][0]) + '); width:' + width + '%"><strong>' + Math.round(width) + '%</strong></span>';
+        }
+
+        output.html(str);
+    }
 };
 
 var handleFileSelect = function (e) {
-    var reader = new FileReader();
-    var output = document.getElementById('output');
-
-    reader.onload = function (e) {
-        Utils.getPixelsFromSrc(e.target.result, function (pixels) {
-
-            var colors = Utils.getProminentColors(pixels);
-            var i, len, width;
-            var str = '';
-
-            for (i = 0, len = colors.colors.length; i < len; i++) {
-                width = colors.colors[i][1] / colors.sum * 100;
-                str += '<span style="background-color:rgb(' + Utils.toRGB.apply(this, colors.colors[i][0]) + '); width:' + width + '%"><strong>' + Math.round(width) + '%</strong></span>';
-            }
-
-            output.innerHTML = str;
-        });
-    };
-
-    // Read in the image file as a data URL.
-    reader.readAsDataURL(e.target.files[0]);
+    Utils.readFile(e.target.files[0]);
 };
 
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
+$('#files').on('change', handleFileSelect);
+
+
+if (Modernizr.draganddrop) {
+    $('.content')
+        .on('dragover', function () {
+            $(this).addClass('dragover');
+            return false;
+        })
+        .on('dragend', function () {
+            $(this).removeClass('dragover');
+            return false;
+        })
+        .on('drop', function (e) {
+            e.preventDefault();
+            $(this).removeClass('dragover');
+
+            if (e.dataTransfer.files.length > 0) {
+                Utils.readFile(e.dataTransfer.files[0]);
+            }
+        });
+}

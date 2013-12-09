@@ -115,22 +115,7 @@
     "maxerr"        : 100,      // Maximum errors before stopping.
     "predef"        : [         // Extra globals.
         "$",
-        "Zepto",
         "_",
-        "_t",
-        "Badoo",
-        "BadooNative",
-        "B",
-        "console",
-        "dust",
-        "assert",
-        "alert",
-        "confirm",
-        "escape",
-        "unescape",
-        "requestAnimationFrame",
-        "FastClick",
-        "Date",
-        "iScroll"
+        "Modernizr"
     ]
 }
