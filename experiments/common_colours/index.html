@@ -4,16 +4,20 @@ title: Common colours of an image
 
 {% include header.html %}
 
-<!--
-
-Please don't judge my code quality. I hacked this together while experimenting.
-
- -->
 <style>
     * {
         margin: 0;
         padding: 0;
         font-family: Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+    }
+
+    .content {
+        background: #fefefe;
+        border-radius: 5px;
+        width: 70%;
+        margin: 10px auto;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     h1 {
@@ -35,29 +39,42 @@ Please don't judge my code quality. I hacked this together while experimenting.
     }
 
     #output {
-        display: block;
-        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
         overflow: hidden;
-        height: 500px;
-        margin: 20px 0;
+        pointer-events: none;
+        z-index: -1;
     }
 
     #output span {
         height: 100%;
         float: left;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #output strong {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        font-size: 20px;
         text-shadow: 0 0 1px #000;
         color: #fff;
-        font-size: 10px;
-        text-align: center;
-        line-height: 30px;
+        width: 100%;
     }
+
 </style>
 
-<h1>Common colours of an Image</h1>
-<p>This simple algorithm tries to determine common colours of an image, feel free to check out the source code</p>
-<p>The processing is done in Javascript, uses RGB to YUV conversion and then euclidian distance between the colours to determine matches</p>
-<input type="file" id="files" name="files[]" multiple />
 <div id="output"></div>
+
+<div class="content">
+    <h1>Common Colors</h1>
+    <input type="file" id="files" name="files[]" multiple />
+</div>
 
 <script src="underscore.js"></script>
 <script src="common_colours.js"></script>
