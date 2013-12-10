@@ -47,13 +47,13 @@ var Utils = {
     },
 
     /**
-     * Euclidian distance between two color sets. It gives less priority to the luma.
+     * Euclidian distance between two color sets. It gives less priority to the chroma.
      * @param  {Array} a an array with 3 num children
      * @param  {Array} b an array with 3 num children
      * @return {Number}   distance between the two colors
      */
     euclidianDistance: function (a, b) {
-        return 0.5 * Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2);
+        return Math.pow(a[0] - b[0], 2) + (Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2)) * 0.5;
     },
 
     /**
@@ -77,17 +77,15 @@ var Utils = {
         // Compare each element in the sample with the other to calculate the distance
         // of that one from the other
         for (i = 0; i < len; i++) {
-            for (j = len; j > i; j--) {
+            for (j = i+1; j < len; j++) {
                 if (samples[i] && samples[j]) {
-
                     dist = this.euclidianDistance(samples[i][0], samples[j][0]);
 
                     // Colors are similar, eat and kill the other one adding it's weight
-                    if (dist < 300) {
+                    if (dist < 1000) {
                         samples[i][1] += samples[j][1];
                         samples[j] = null;
                     }
-
                 }
             }
         }
