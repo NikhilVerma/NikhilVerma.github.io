@@ -47,13 +47,13 @@ var Utils = {
     },
 
     /**
-     * Euclidian distance between two color sets
+     * Euclidian distance between two color sets. It gives less priority to the luma.
      * @param  {Array} a an array with 3 num children
      * @param  {Array} b an array with 3 num children
      * @return {Number}   distance between the two colors
      */
     euclidianDistance: function (a, b) {
-        return Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2);
+        return 0.5 * Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2);
     },
 
     /**
@@ -83,14 +83,11 @@ var Utils = {
                     dist = this.euclidianDistance(samples[i][0], samples[j][0]);
 
                     // Colors are similar, eat and kill the other one adding it's weight
-                    if (dist < 500) {
+                    if (dist < 300) {
                         samples[i][1] += samples[j][1];
                         samples[j] = null;
                     }
-                    // colors are too different, we need to give those priority as well
-                    else if (dist > 6000) {
-                        samples[j][1] += 1;
-                    }
+
                 }
             }
         }
@@ -122,10 +119,10 @@ var Utils = {
         var ctx = canvas.getContext('2d');
 
         /**
-         * We scale the image down to 20x width
+         * We scale the image down to 40px width
          * @type {Number}
          */
-        var TARGET_WIDTH = 20;
+        var TARGET_WIDTH = 40;
 
         /**
          * Number of steps to take when scaling the image
