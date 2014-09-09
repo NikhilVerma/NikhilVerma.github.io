@@ -1,18 +1,17 @@
 
 ## Technical Experience
 
-* Javascript, Zepto/jQuery, Underscore.js, Backbone.js, PHP, Python and Node.js
+* Javascript, Zepto/jQuery, Underscore, Backbone and Node.js
 * CSS3, LESS, SASS
 * HTML5, PEG.js
+* Grunt, Maven, Make
+* BusterJs, Mocha, ExpectJS
+* PhantomJS, Node-Webkit
 * Adobe Photoshop
 * Git, SVN
 * Markdown, Dust
-* \*nix systems, Shell Scripting, Maven
-* Responsive layout with special emphasis on mobile first designs
-* Cross browser compatibilities
-* Performance optimizations for Desktop and Mobile using both CSS and Javascript
+* \*nix systems, Shell Scripting
 * Agile/Scrum
-* Buster.js, js-test-driver
 
 
 ## Career

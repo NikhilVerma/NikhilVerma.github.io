@@ -2,8 +2,11 @@
 	"folders":
 	[
 		{
-			"path": "/Users/nikhilverma/Desktop/repos/NikhilVerma.github.io",
-            "folder_exclude_patterns": ["_site"]
+			"folder_exclude_patterns":
+			[
+				"_site"
+			],
+			"path": "/Users/nikhilverma/Desktop/repos/NikhilVerma.github.io"
 		}
 	]
 }
