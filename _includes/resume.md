@@ -1,17 +1,14 @@
 
 ## Technical Experience
 
-* Javascript, Zepto/jQuery, Underscore, Backbone and Node.js
-* CSS3, LESS, SASS
-* HTML5, PEG.js
-* Grunt, Maven, Make
-* BusterJs, Mocha, ExpectJS
-* PhantomJS, Node-Webkit
-* Adobe Photoshop
-* Git, SVN
-* Markdown, Dust
-* \*nix systems, Shell Scripting
-* Agile/Scrum
+* **Javascript:** ES6, Babel, Ractive, Zepto, Lodash/Underscore, PEG.js, Backbone and Node.js
+* **Other frontend:** CSS3/LESS/SASS, HTML5
+* **Build tools:** Grunt, Maven, Make
+* **Testing:** BusterJs, Mocha, ExpectJS
+* **Design:** Adobe Photoshop
+* **Source Control:** Git, SVN
+* **Templates:** Markdown, Dust
+* **Misc:** \*nix systems, Shell Scripting
 
 
 ## Career

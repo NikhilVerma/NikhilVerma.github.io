@@ -1,3 +1,6 @@
 safe: true
 lsi: false
-pygments: true
+highlighter: true
+compress_less: true
+use_lessjs: false
+lessc: /usr/local/bin/lessc
